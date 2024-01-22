@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+        path: samples/counter-app  # Set the path to the deployment directory
+          ref: main
 
       - name: Setup Node.js
         uses: actions/setup-node@v2
@@ -20,10 +22,17 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+        path: samples/counter-app  # Set the path to the deployment directory
+          ref: main
 
       - name: Build
         run: npm run build
+        path: samples/counter-app  # Set the path to the deployment directory
+          ref: main
 
       - name: Deploy to GCP
         run: |
+        cd samples/counter-app
+        gcloud app deploy --quiet
+
           # Add commands to deploy to GCP here
