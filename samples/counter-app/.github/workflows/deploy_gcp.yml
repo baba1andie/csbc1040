@@ -1,0 +1,37 @@
+name: Deploy to GCP
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          path: samples/counter-app  # Set the path to the deployment directory
+          ref: main
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install dependencies
+        run: npm install
+        working-directory: samples/counter-app
+
+      - name: Build
+        run: npm run build
+        working-directory: samples/counter-app
+
+      - name: Deploy to GCP
+        run: |
+         cd samples/counter-app
+         gcloud app deploy --quiet
+
+          # Add commands to deploy to GCP here
