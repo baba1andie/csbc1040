@@ -1,0 +1,35 @@
+# samples/counter-app/.github/workflows/lint_and_test.yml
+
+name: Lint and Test
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  lint_and_test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          path: samples/counter-app  # Set the path to the directory containing package.json
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install dependencies
+        run: npm install
+        working-directory: samples/counter-app  # Set the working directory for npm commands
+
+      - name: Lint code
+        run: npm run lint
+        working-directory: samples/counter-app
+
+      - name: Run unit tests
+        run: npm test
+        working-directory: samples/counter-app
