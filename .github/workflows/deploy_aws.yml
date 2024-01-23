@@ -13,7 +13,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
         with:
-          path: samples/counter-app  
+          path: csbc1040/samples/counter-app  
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
@@ -21,11 +21,11 @@ jobs:
           node-version: 14
 
       - name: Install Dependencies
-        working-directory: samples/counter-app  
+        working-directory: csbc1040/samples/counter-app  
         run: npm install
 
       - name: Build
-        working-directory: samples/counter-app  
+        working-directory: csbc1040/samples/counter-app  
         run: npm run build
 
       - name: Deploy to AWS Amplify
